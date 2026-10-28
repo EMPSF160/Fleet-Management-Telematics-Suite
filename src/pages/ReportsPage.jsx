@@ -116,7 +116,7 @@ export default function ReportsPage({ currentUser, onSwitchRole, vehicles }) {
   const categories = ['All', 'Telematics & Fuel', 'Diagnostics', 'Safety & Compliance', 'DOT Compliance'];
 
   return (
-    <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '24px 20px 60px 20px' }}>
+    <div className="reports-page-wrapper" style={{ maxWidth: '1400px', margin: '0 auto', padding: '24px 20px 60px 20px' }}>
       {/* Header */}
       <div
         style={{
@@ -333,6 +333,7 @@ export default function ReportsPage({ currentUser, onSwitchRole, vehicles }) {
       {/* Audit Reports Directory Table */}
       <div>
         <div
+          className="reports-section-header"
           style={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -344,34 +345,26 @@ export default function ReportsPage({ currentUser, onSwitchRole, vehicles }) {
         >
           <h2 style={{ fontSize: '1.25rem' }}>Telematics Compliance & Activity Reports</h2>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center' }}>
-            <div style={{ position: 'relative' }}>
+          <div className="reports-filters-wrapper">
+            <div className="reports-search-box">
               <input
                 type="text"
                 placeholder="Search audit log..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="form-input"
-                style={{ paddingLeft: '34px', width: '220px', height: '36px', fontSize: '0.85rem' }}
+                className="form-input reports-search-input"
               />
-              <Search size={14} color="var(--text-dim)" style={{ position: 'absolute', left: '11px', top: '11px' }} />
+              <Search size={14} color="var(--text-dim)" className="reports-search-icon" />
             </div>
 
-            <div style={{ display: 'flex', gap: '4px', background: 'var(--bg-surface)', padding: '3px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+            <div className="reports-category-pills" role="tablist" aria-label="Report Categories">
               {categories.map((cat) => (
                 <button
                   key={cat}
+                  role="tab"
+                  aria-selected={categoryFilter === cat}
                   onClick={() => setCategoryFilter(cat)}
-                  style={{
-                    padding: '5px 10px',
-                    borderRadius: '6px',
-                    border: 'none',
-                    background: categoryFilter === cat ? 'var(--accent-gradient)' : 'transparent',
-                    color: categoryFilter === cat ? '#ffffff' : 'var(--text-muted)',
-                    fontSize: '0.78rem',
-                    fontWeight: 600,
-                    cursor: 'pointer'
-                  }}
+                  className={`reports-category-btn ${categoryFilter === cat ? 'active' : ''}`}
                 >
                   {cat}
                 </button>
@@ -556,6 +549,111 @@ export default function ReportsPage({ currentUser, onSwitchRole, vehicles }) {
           </div>
         </div>
       )}
+      {/* Responsive Filter Bar & Mobile Layout CSS */}
+      <style>{`
+        .reports-filters-wrapper {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          align-items: center;
+        }
+        .reports-search-box {
+          position: relative;
+          width: 220px;
+        }
+        .reports-search-input {
+          padding-left: 34px !important;
+          height: 36px !important;
+          font-size: 0.85rem !important;
+          width: 100% !important;
+        }
+        .reports-search-icon {
+          position: absolute;
+          left: 11px;
+          top: 11px;
+          pointer-events: none;
+        }
+        .reports-category-pills {
+          display: flex;
+          gap: 4px;
+          background: var(--bg-surface);
+          padding: 3px;
+          border-radius: 8px;
+          border: 1px solid var(--border-subtle);
+          max-width: 100%;
+          overflow-x: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          -webkit-overflow-scrolling: touch;
+        }
+        .reports-category-pills::-webkit-scrollbar {
+          display: none;
+        }
+        .reports-category-btn {
+          padding: 6px 12px;
+          border-radius: 6px;
+          border: none;
+          background: transparent;
+          color: var(--text-muted);
+          font-size: 0.78rem;
+          font-weight: 600;
+          cursor: pointer;
+          white-space: nowrap;
+          flex-shrink: 0;
+          transition: all 0.2s ease;
+        }
+        .reports-category-btn.active {
+          background: var(--accent-gradient);
+          color: #ffffff;
+        }
+
+        /* Mobile Layout Optimizations (< 680px and <= 360px) */
+        @media (max-width: 680px) {
+          .reports-section-header {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+          }
+          .reports-filters-wrapper {
+            width: 100% !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 10px !important;
+          }
+          .reports-search-box {
+            width: 100% !important;
+          }
+          .reports-category-pills {
+            width: 100% !important;
+            padding: 4px !important;
+            gap: 6px !important;
+          }
+          .reports-category-btn {
+            padding: 7px 13px !important;
+            font-size: 0.8rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .reports-page-wrapper {
+            padding: 16px 12px 40px 12px !important;
+          }
+        }
+
+        @media (max-width: 360px) {
+          .reports-page-wrapper {
+            padding: 12px 8px 36px 8px !important;
+          }
+          .reports-category-pills {
+            gap: 4px !important;
+            padding: 3px !important;
+          }
+          .reports-category-btn {
+            padding: 6px 10px !important;
+            font-size: 0.76rem !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

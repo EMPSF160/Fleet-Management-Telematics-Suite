@@ -16,6 +16,7 @@ export default function Logo({ size = 'md', onClick, isClickable = true, showSub
 
   const content = (
     <div
+      className="logo-container"
       style={{
         display: 'inline-flex',
         alignItems: 'center',
@@ -40,6 +41,7 @@ export default function Logo({ size = 'md', onClick, isClickable = true, showSub
         height={pixelSize}
         viewBox="0 0 64 64"
         fill="none"
+        className="logo-mark"
         style={{ flexShrink: 0, filter: 'drop-shadow(0 2px 8px rgba(6, 182, 212, 0.4))' }}
       >
         <defs>
@@ -70,9 +72,10 @@ export default function Logo({ size = 'md', onClick, isClickable = true, showSub
       </svg>
 
       {/* Brand Typography */}
-      <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.1 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.1, minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <span
+            className="logo-title"
             style={{
               fontSize: size === 'sm' ? '1rem' : size === 'lg' ? '1.45rem' : size === 'xl' ? '1.75rem' : '1.2rem',
               fontWeight: 800,
@@ -80,12 +83,14 @@ export default function Logo({ size = 'md', onClick, isClickable = true, showSub
               background: 'var(--accent-gradient, linear-gradient(135deg, #06b6d4, #3b82f6))',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              textTransform: 'uppercase'
+              textTransform: 'uppercase',
+              whiteSpace: 'nowrap'
             }}
           >
             OCT Smart
           </span>
           <span
+            className="logo-badge"
             style={{
               fontSize: size === 'sm' ? '0.65rem' : '0.72rem',
               fontWeight: 700,
@@ -94,7 +99,8 @@ export default function Logo({ size = 'md', onClick, isClickable = true, showSub
               background: 'rgba(6, 182, 212, 0.15)',
               color: 'var(--accent-primary, #06b6d4)',
               border: '1px solid var(--border-subtle)',
-              letterSpacing: '0.04em'
+              letterSpacing: '0.04em',
+              whiteSpace: 'nowrap'
             }}
           >
             v2.6
@@ -102,13 +108,15 @@ export default function Logo({ size = 'md', onClick, isClickable = true, showSub
         </div>
         {showSubtitle && (
           <span
+            className="logo-subtitle"
             style={{
               fontSize: size === 'sm' ? '0.65rem' : '0.72rem',
               fontWeight: 600,
               letterSpacing: '0.08em',
               color: 'var(--text-muted, #94a3b8)',
               textTransform: 'uppercase',
-              marginTop: '2px'
+              marginTop: '2px',
+              whiteSpace: 'nowrap'
             }}
           >
             Fleet & Telematics Suite

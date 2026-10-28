@@ -4,13 +4,30 @@ import {
   Instagram,
   Facebook,
   Linkedin,
-  Twitter,
   Youtube,
   Radio,
   ShieldCheck,
   Server,
   ExternalLink
 } from 'lucide-react';
+
+/**
+ * Modern official X (formerly Twitter) icon
+ */
+function XTwitterIcon({ size = 20, ...props }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 24.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
 
 export default function Footer({ onNavigate }) {
   // 5 verified social links with valid external URLs, equal size, consistent shape, and proper accessibility
@@ -22,10 +39,10 @@ export default function Footer({ onNavigate }) {
       label: 'Visit OCT Smart Fleet on LinkedIn'
     },
     {
-      name: 'X (Twitter)',
-      icon: Twitter,
-      url: 'https://twitter.com/oct_smart_fleet',
-      label: 'Follow OCT Smart Fleet on X'
+      name: 'X',
+      icon: XTwitterIcon,
+      url: 'https://x.com/oct_smart_fleet',
+      label: 'Follow OCT Smart Fleet on X (formerly Twitter)'
     },
     {
       name: 'Facebook',
